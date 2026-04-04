@@ -1,0 +1,43 @@
+// ============================================================
+// PORTFOLIO OS - DARK MINIMAL THEME
+// ============================================================
+
+// ---- Public Site (Dark Minimal Black) ----
+$site-bg: #000000;
+$site-bg-secondary: #111111;
+$site-bg-card: #161616;
+$site-bg-card-hover: #1c1c1c;
+$site-border: #2a2a2a;
+$site-text: #ffffff;
+$site-text-muted: #888888;
+$site-text-dim: #555555;
+
+// ---- Admin Dashboard (Bootstrap Dark) ----
+$primary: #6366f1;
+$info: #0ea5e9;
+$success: #10b981;
+$warning: #f59e0b;
+$danger: #ef4444;
+
+$body-bg: #0a0a0f;
+$body-bg-darker: #060609;
+$body-color: #f0f0f5;
+$text-muted: #888899;
+
+$font-family-base: 'Inter', sans-serif;
+$enable-cssgrid: true;
+
+// Custom
+$glass-bg: rgba(10, 10, 20, 0.8);
+$glass-border: rgba(255, 255, 255, 0.07);
+
+@import 'bootstrap/scss/functions';
+@import 'bootstrap/scss/variables';
+
+$theme-colors: map-merge($theme-colors, (
+  "primary": $primary,
+  "info": $info,
+  "success": $success,
+  "warning": $warning,
+  "danger": $danger
+));
