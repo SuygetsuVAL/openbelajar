@@ -1,0 +1,16 @@
+{
+    "buildCommand": "npm run build",
+    "outputDirectory": "public",
+    "devCommand": "npm run dev",
+    "functions": {
+        "api/index.php": {
+            "runtime": "php-8.2"
+        }
+    },
+    "rewrites": [
+        {
+            "source": "/(.*)",
+            "destination": "/index.php"
+        }
+    ]
+}
