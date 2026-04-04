@@ -1,10 +1,10 @@
 {
-    "buildCommand": "npm run build && php artisan config:cache && php artisan route:cache",
+    "buildCommand": "npm run build",
     "outputDirectory": "public",
     "devCommand": "npm run dev",
     "functions": {
         "api/index.php": {
-            "runtime": "php-8.2",
+            "runtime": "vercel-php@1.1.0",
             "maxDuration": 30
         }
     },
