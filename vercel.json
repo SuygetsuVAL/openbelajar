@@ -1,16 +1,33 @@
 {
-    "buildCommand": "npm run build",
+    "buildCommand": "npm run build && php artisan config:cache && php artisan route:cache",
     "outputDirectory": "public",
     "devCommand": "npm run dev",
     "functions": {
         "api/index.php": {
-            "runtime": "php-8.2"
+            "runtime": "php-8.2",
+            "maxDuration": 30
         }
     },
-    "rewrites": [
+    "routes": [
         {
-            "source": "/(.*)",
-            "destination": "/index.php"
+            "src": "/storage(.*)",
+            "dest": "/storage$1"
+        },
+        {
+            "src": "/css(.*)",
+            "dest": "/css$1"
+        },
+        {
+            "src": "/js(.*)",
+            "dest": "/js$1"
+        },
+        {
+            "src": "/build(.*)",
+            "dest": "/build$1"
+        },
+        {
+            "src": "/(.*)",
+            "dest": "/api/index.php"
         }
     ]
 }
