@@ -1,33 +1,38 @@
 {
-    "buildCommand": "npm run build",
-    "outputDirectory": "public",
-    "devCommand": "npm run dev",
-    "functions": {
-        "api/index.php": {
-            "runtime": "vercel-php@0.5.2",
-            "maxDuration": 30
+    "version": 2,
+    "builds": [
+        {
+            "src": "package.json",
+            "use": "@vercel/static-build",
+            "config": {
+                "distDir": "public/build"
+            }
+        },
+        {
+            "src": "api/index.php",
+            "use": "vercel-php@0.6.0"
         }
-    },
+    ],
     "routes": [
-        {
-            "src": "/storage(.*)",
-            "dest": "/storage$1"
-        },
-        {
-            "src": "/css(.*)",
-            "dest": "/css$1"
-        },
-        {
-            "src": "/js(.*)",
-            "dest": "/js$1"
-        },
-        {
-            "src": "/build(.*)",
-            "dest": "/build$1"
-        },
         {
             "src": "/(.*)",
             "dest": "/api/index.php"
         }
-    ]
+    ],
+    "env": {
+        "APP_ENV": "production",
+        "APP_DEBUG": "false",
+        "APP_URL": "https://laravelweb.vercel.app",
+
+        "APP_CONFIG_CACHE": "/tmp/config.php",
+        "APP_EVENTS_CACHE": "/tmp/events.php",
+        "APP_PACKAGES_CACHE": "/tmp/packages.php",
+        "APP_ROUTES_CACHE": "/tmp/routes.php",
+        "APP_SERVICES_CACHE": "/tmp/services.php",
+        "VIEW_COMPILED_PATH": "/tmp",
+
+        "CACHE_DRIVER": "array",
+        "LOG_CHANNEL": "stderr",
+        "SESSION_DRIVER": "cookie"
+    }
 }
