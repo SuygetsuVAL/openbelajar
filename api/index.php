@@ -12,7 +12,8 @@ require_once __DIR__ . '/../vendor/autoload.php';
 // Check if vendor directory exists - fail gracefully with info
 if (!file_exists(__DIR__ . '/../vendor/autoload.php')) {
     http_response_code(503);
-    die('Service Unavailable: Vendor files not found. Run composer install.');
+    header('Content-Type: application/json');
+    die(json_encode(['error' => 'Service Unavailable: Vendor files not found.']));
 }
 
 // Bootstrap Laravel application
@@ -20,16 +21,23 @@ try {
     $app = require_once __DIR__ . '/../bootstrap/app.php';
 } catch (Exception $e) {
     http_response_code(500);
-    die('Failed to bootstrap application: ' . $e->getMessage());
+    header('Content-Type: application/json');
+    die(json_encode(['error' => 'Failed to bootstrap application: ' . $e->getMessage()]));
 }
 
 // Create HTTP kernel and handle request
 $kernel = $app->make(Illuminate\Contracts\Http\Kernel::class);
 
-$response = $kernel->handle(
-    $request = Illuminate\Http\Request::capture()
-);
-
-$response->send();
-
-$kernel->terminate($request, $response);
+try {
+    $response = $kernel->handle(
+        $request = Illuminate\Http\Request::capture()
+    );
+    
+    $response->send();
+    
+    $kernel->terminate($request, $response);
+} catch (Exception $e) {
+    http_response_code(500);
+    header('Content-Type: application/json');
+    die(json_encode(['error' => 'Server Error: ' . $e->getMessage()]));
+}
