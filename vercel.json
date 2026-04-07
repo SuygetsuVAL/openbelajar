@@ -12,7 +12,7 @@
             "src": "api/index.php",
             "use": "vercel-php@0.6.0",
             "config": {
-                "maxLambdaSize": "50mb"
+                "maxLambdaSize": "100mb"
             }
         }
     ],
@@ -20,6 +20,18 @@
         {
             "src": "/build/(.*)",
             "dest": "/build/$1"
+        },
+        {
+            "src": "/images/(.*)",
+            "dest": "/images/$1"
+        },
+        {
+            "src": "/favicon.ico",
+            "dest": "/favicon.ico"
+        },
+        {
+            "src": "/robots.txt",
+            "dest": "/robots.txt"
         },
         {
             "src": "/(.*)",
